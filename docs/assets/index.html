@@ -1,0 +1,219 @@
+<!-- http://demos.jquerymobile.com/1.2.0-rc.1/docs/about/getting-started.html -->
+<!-- JQuery mobile 媛�醫� http://cofs.tistory.com/152?category=637492 -->
+<!-- swiper library https://github.com/nolimits4web/Swiper/blob/master/demos/090-vertical.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-rc.1/jquery.mobile-1.2.0-rc.1.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.css">
+
+
+  <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0-rc.1/jquery.mobile-1.2.0-rc.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.js"></script>
+
+  <style type="text/css">
+  .swiper-container {
+    width: 100%;
+    height: 480px;
+    background: #000;
+  }
+  html, body {
+    position: relative;
+    height: 100%;
+  }
+  body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+  }
+  .swiper-slide {
+    font-size: 18px;
+    color:#fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 40px 60px;
+  }
+  .parallax-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+  }
+  .swiper-slide .title {
+    font-size: 41px;
+    font-weight: 300;
+  }
+  .swiper-slide .subtitle {
+    font-size: 21px;
+  }
+  .swiper-slide .text {
+    font-size: 14px;
+    max-width: 400px;
+    line-height: 1.3;
+  }
+
+  </style>
+
+</head>
+<body>
+  <div id="page1" data-role="page">
+    <div data-role="header" ><h1>Page1</h1> </div> <!-- /header -->
+    <div class="content" data-role="content">
+      <ul data-role="listview" data-inset="true" data-filter="true">
+        <li><a href="#">Acura</a></li>
+        <li><a href="#">Audi</a></li>
+        <li><a href="#">BMW</a></li>
+        <li><a href="#">Cadillac</a></li>
+        <li><a href="#">Ferrari</a></li>
+      </ul>
+
+      <form action="submit_process.php" method="post" data-ajax="false" class="ui-body ui-body-a ui-corner-all">
+        <p>
+          <label for="flavor">flavor:</label>
+          <input type="range" name="flavor" id="flavor" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="body">body:</label>
+          <input type="range" name="body" id="body" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="acidity">acidity:</label>
+          <input type="range" name="acidity" id="acidity" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="roastlevel">roastlevel:</label>
+          <input type="range" name="roastlevel" id="roastlevel" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="aroma">aroma:</label>
+          <input type="range" name="aroma" id="aroma" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="aftertaste">aftertaste:</label>
+          <input type="range" name="aftertaste" id="aftertaste" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="balance">balance:</label>
+          <input type="range" name="balance" id="balance" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="uniformity">uniformity:</label>
+          <input type="range" name="uniformity" id="uniformity" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="sweetness">sweetness:</label>
+          <input type="range" name="sweetness" id="sweetness" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="cleanup">cleanup:</label>
+          <input type="range" name="cleanup" id="cleanup" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <p>
+          <label for="defect">defect:</label>
+          <input type="range" name="defect" id="defect" value="5" min="0" max="10" step="1" data-highlight="true" />
+        </p>
+
+        <!--<button type="submit" data-theme="b" name="submit" value="value">Submit</button> -->
+        <p><input type="submit" value="Save" data-theme="b"></p>
+        <a href="#page2" >page2</a>
+      </form> <!-- /submit_process.php submit form -->
+    </div><!-- /content -->
+
+    <div data-role="footer"> footer </div> <!-- /footer -->
+  </div> <!-- /page1 -->
+
+  <div id="page2" data-role="page">
+    <div data-role="header" >
+      <a href="#" data-role="ui-button" data-rel="back"> back </a>
+      <h1>Page2</h1>
+    </div> <!-- /header -->
+
+    <div class="content" data-role="content" style="padding:0px">
+      <!-- Slider main container -->
+      <!-- Swiper -->
+      <div class="swiper-container">
+        <div class="parallax-bg" style="background-image:url(http://lorempixel.com/900/600/nightlife/2/)" data-swiper-parallax="-23%"></div>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="title" data-swiper-parallax="-300">Slide 1</div>
+            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+            <div class="text" data-swiper-parallax="-100">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+              <label for="flavor">flavor:</label>
+              <input type="range" name="flavor2" id="flavor" value="5" min="0" max="10" step="1" data-highlight="true" />
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="title" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">Slide 2</div>
+            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+            <div class="text" data-swiper-parallax="-100">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="title" data-swiper-parallax="-300">Slide 3</div>
+            <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+            <div class="text" data-swiper-parallax="-100">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+        <!-- Add Navigation
+        <div class="swiper-button-prev swiper-button-white"></div>
+        <div class="swiper-button-next swiper-button-white"></div>
+      -->
+    </div>
+  </div><!-- /content -->
+
+  <div data-role="footer"> footer </div> <!-- /footer -->
+</div> <!-- /page2 -->
+
+<script type="text/javascript">
+$(document).ready(function () {
+  //initialize swiper when document ready
+  var mySwiper = new Swiper ('.swiper-container', {
+    // Optional parameters
+    direction: 'vertical',
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    loop: true
+  })
+
+
+
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
