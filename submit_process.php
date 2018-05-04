@@ -27,7 +27,7 @@ $defect = htmlspecialchars( $_POST['defect'] );
 
 
 $conn = mysqli_connect("localhost", "root", "11182917", "cupping");
-$url = 'http://127.0.0.1:8080/cupping/docs/assets/index.html';
+$url = 'http://127.0.0.1:8080/cupping/index.php';
 
 mysqli_query($conn, "
 INSERT INTO taste (
