@@ -25,6 +25,7 @@ if($result->num_rows == 1)
   if($row['password'] == $password){
     session_start();
     $_SESSION['username']=$username;
+    $_SESSION['firstlogin']='true';
     if(isset($_SESSION['username']))
     {
       header('Location: ./main.php');

@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start();?>
 
 <!DOCTYPE html>
 
@@ -109,28 +109,113 @@
     background: #e37900;
   }
 
-
-
   </style>
 
+
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="js/custom.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <script>
+  $("#flavor").on('input', function() {
+    $("#flavor_value").html( $(this).val() );
+  });
+  $("#balance").on('input', function() {
+    $("#balance_value").html( $(this).val() );
+  });
+  $("#roasting").on('input', function() {
+    $("#roasting_value").html( $(this).val() );
+  });
+  $("#acidity").on('input', function() {
+    $("#acidity_value").html( $(this).val() );
+  });
+  $("#sweetness").on('input', function() {
+    $("#sweetness_value").html( $(this).val() );
+  });
+  $("#aroma").on('input', function() {
+    $("#aroma_value").html( $(this).val() );
+  });
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-23019901-1']);
-  _gaq.push(['_setDomainName', "bootswatch.com"]);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
+  $("#aftertaste").on('input', function() {
+    $("#aftertaste_value").html( $(this).val() );
+  });
+  $("#uniformity").on('input', function() {
+    $("#uniformity_value").html( $(this).val() );
+  });
+  $("#cleanup").on('input', function() {
+    $("#cleanup_value").html( $(this).val() );
+  });
+  $("#defect").on('input', function() {
+    $("#defect_value").html( $(this).val() );
+  });
+  $("#body").on('input', function() {
+    $("#body_value").html( $(this).val() );
+  });
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+
+
+
+  </script>
+
+
+  <script>
+  $( function() {
+    // run the currently selected effect
+    function runEffect() {
+      // Run the effect
+      $( "#effect" ).show( 'blind', '', 500, callback );
+    };
+
+    //callback function to bring a hidden box back
+    function callback() {
+      setTimeout(function() {
+        $( "#effect:visible" ).removeAttr( "style" ).fadeOut();
+      }, 1000 );
+    };
+
+    // Set effect from select menu value
+/*
+    $( "#button" ).on( "click", function() {
+      runEffect();
+    });
+*/
+
+    $( "#effect" ).hide();
+
+
+  });
+</script>
+
+<script>
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-23019901-1']);
+_gaq.push(['_setDomainName', "bootswatch.com"]);
+_gaq.push(['_setAllowLinker', true]);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
 
 </script>
 </head>
 
 <body>
+
+  <div class="toggler">
+    <div id="effect" class="ui-widget-content ui-corner-all">
+      <h3 class="ui-widget-header ui-corner-all">Saved</h3>
+      <p> saving success.</p>
+    </div>
+  </div>
+
+
   <!-- head -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">CUPPING</a>
@@ -285,57 +370,21 @@
   </div> <!-- container marketing -->
 
   <div class="alert alert-dismissible alert-primary">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-</div>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+  </div>
 
-  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  <script src="js/custom.js"></script>
+  <?php
+  echo '<script>';
+  if ( isset($_SESSION['username']) )
+  {
 
+    echo 'runEffect();';
 
-
-  <script>
-  $("#flavor").on('input', function() {
-    $("#flavor_value").html( $(this).val() );
-  });
-  $("#balance").on('input', function() {
-    $("#balance_value").html( $(this).val() );
-  });
-  $("#roasting").on('input', function() {
-    $("#roasting_value").html( $(this).val() );
-  });
-  $("#acidity").on('input', function() {
-    $("#acidity_value").html( $(this).val() );
-  });
-  $("#sweetness").on('input', function() {
-    $("#sweetness_value").html( $(this).val() );
-  });
-  $("#aroma").on('input', function() {
-    $("#aroma_value").html( $(this).val() );
-  });
-
-  $("#aftertaste").on('input', function() {
-    $("#aftertaste_value").html( $(this).val() );
-  });
-  $("#uniformity").on('input', function() {
-    $("#uniformity_value").html( $(this).val() );
-  });
-  $("#cleanup").on('input', function() {
-    $("#cleanup_value").html( $(this).val() );
-  });
-  $("#defect").on('input', function() {
-    $("#defect_value").html( $(this).val() );
-  });
-  $("#body").on('input', function() {
-    $("#body_value").html( $(this).val() );
-  });
-
-
-
-
-  </script>
+    $_SESSION['firstlogin'] = false;
+  }
+  echo '</script>';
+  ?>
 
 </body>
 
