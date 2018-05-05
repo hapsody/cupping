@@ -12,6 +12,7 @@ echo $_POST['sweetness'];
 echo $_POST['cleanup'];
 echo $_POST['defect'];
 */
+session_start();
 
 $flavor = htmlspecialchars( $_POST['flavor'] );
 $body = htmlspecialchars( $_POST['body'] );
@@ -58,6 +59,7 @@ INSERT INTO taste (
     NOW()
     )");
 
+    $_SESSION['saved'] = true;
     header('Location: '.$url );
 
     ?>

@@ -177,16 +177,30 @@
     };
 
     // Set effect from select menu value
-/*
+    /*
     $( "#button" ).on( "click", function() {
-      runEffect();
-    });
-*/
-
-    $( "#effect" ).hide();
-
-
+    runEffect();
   });
+  */
+  $( "#effect" ).hide();
+  <?php
+  //if ( isset($_SESSION['username']) )
+  if ( isset($_SESSION['saved']) ){
+    if ( $_SESSION['saved'] == true)
+    {
+
+      echo 'runEffect();';
+
+      $_SESSION['saved'] = false;
+    }
+  }
+  ?>
+
+
+
+
+
+});
 </script>
 
 <script>
@@ -374,17 +388,7 @@ _gaq.push(['_trackPageview']);
     <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
   </div>
 
-  <?php
-  echo '<script>';
-  if ( isset($_SESSION['username']) )
-  {
 
-    echo 'runEffect();';
-
-    $_SESSION['firstlogin'] = false;
-  }
-  echo '</script>';
-  ?>
 
 </body>
 
