@@ -244,7 +244,7 @@ _gaq.push(['_trackPageview']);
 
       <div class="row"> <!-- row 1-->
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics" > <img  src="img/flavor2.png" alt="flavor_img" width="110" height="110" style="margin-top:22px" > </div>
+          <div class="rounded-circle taste-pics" > <img  src="img/flavor5.png" alt="flavor_img" width="140" height="140"  > </div>
           <h2>Flavor</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
 
@@ -287,7 +287,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/smell2.png" alt="Generic placeholder image" width="125" height="125" style="margin-top:5px;"> </div>
+          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/smell2.png" alt="Generic placeholder image" width="125" height="125" style="margin-top:7px; margin-left:-5px;"> </div>
           <h2>Aroma</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <font id="aroma_value">5</font>
@@ -296,7 +296,7 @@ _gaq.push(['_trackPageview']);
       </div><!-- /.row 2 -->
       <div class="row"> <!-- /.row 3 -->
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics" >  </div>
+          <div class="rounded-circle taste-pics" > <img  src="img/aftertaste.png" alt="flavor_img" width="110" height="110" style="margin-top:22px" > </div>
           <h2>Aftertaste</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
           <font id="aftertaste_value">5</font>
@@ -304,7 +304,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics">  </div>
+          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/uniformity2.png" alt="Generic placeholder image" width="180" height="120" style="margin-top:10px;margin-left:-19px" >  </div>
           <h2>Uniformity</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <font id="uniformity_value">5</font>
@@ -312,7 +312,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics"> </div>
+          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/cleanup.png" alt="Generic placeholder image" width="140" height="140" style="margin-left:-15px" > </div>
           <h2>Clean up</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <font id="cleanup_value">5</font>
@@ -321,7 +321,7 @@ _gaq.push(['_trackPageview']);
       </div><!-- /.row 3 -->
       <div class="row"> <!-- /.row 4 -->
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics" >  </div>
+          <div class="rounded-circle taste-pics" > <img class="rounded-circle" src="img/defect.png" alt="Generic placeholder image" width="150" height="100"  style="margin-top:15px" > </div>
           <h2>Defect</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
           <font id="defect_value">5</font>
@@ -329,7 +329,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics">  </div>
+          <div class="rounded-circle taste-pics"> <img src="img/body2.png" alt="Generic placeholder image" width="90" height="90" style="margin-top:20px;margin-left:0px" > </div>
           <h2>Body</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <font id="body_value">5</font>
