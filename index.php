@@ -119,46 +119,7 @@
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-  <script>
-  $("#flavor").on('input', function() {
-    $("#flavor_value").html( $(this).val() );
-  });
-  $("#balance").on('input', function() {
-    $("#balance_value").html( $(this).val() );
-  });
-  $("#roasting").on('input', function() {
-    $("#roasting_value").html( $(this).val() );
-  });
-  $("#acidity").on('input', function() {
-    $("#acidity_value").html( $(this).val() );
-  });
-  $("#sweetness").on('input', function() {
-    $("#sweetness_value").html( $(this).val() );
-  });
-  $("#aroma").on('input', function() {
-    $("#aroma_value").html( $(this).val() );
-  });
 
-  $("#aftertaste").on('input', function() {
-    $("#aftertaste_value").html( $(this).val() );
-  });
-  $("#uniformity").on('input', function() {
-    $("#uniformity_value").html( $(this).val() );
-  });
-  $("#cleanup").on('input', function() {
-    $("#cleanup_value").html( $(this).val() );
-  });
-  $("#defect").on('input', function() {
-    $("#defect_value").html( $(this).val() );
-  });
-  $("#body").on('input', function() {
-    $("#body_value").html( $(this).val() );
-  });
-
-
-
-
-  </script>
 
 
   <script>
@@ -166,14 +127,14 @@
     // run the currently selected effect
     function runEffect() {
       // Run the effect
-      $( "#effect" ).show( 'blind', '', 500, callback );
+      $( "#saving_effect" ).show( 'blind', '', 500, callback );
     };
 
     //callback function to bring a hidden box back
     function callback() {
       setTimeout(function() {
-        $( "#effect:visible" ).removeAttr( "style" ).fadeOut();
-      }, 1000 );
+        $( "#saving_effect:visible" ).removeAttr( "style" ).fadeOut();
+      }, 3000 );
     };
 
     // Set effect from select menu value
@@ -182,7 +143,7 @@
     runEffect();
   });
   */
-  $( "#effect" ).hide();
+  $( "#saving_effect" ).hide();
   <?php
   //if ( isset($_SESSION['username']) )
   if ( isset($_SESSION['saved']) ){
@@ -222,13 +183,11 @@ _gaq.push(['_trackPageview']);
 
 <body>
 
-  <div class="toggler">
-    <div id="effect" class="ui-widget-content ui-corner-all">
-      <h3 class="ui-widget-header ui-corner-all">Saved</h3>
-      <p> saving success.</p>
-    </div>
-  </div>
 
+  <div id="saving_effect" class="alert alert-dismissible alert-primary">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Data Saved</strong>
+  </div>
 
   <!-- head -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -285,7 +244,7 @@ _gaq.push(['_trackPageview']);
 
       <div class="row"> <!-- row 1-->
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics" > <img class="rounded-circle" src="img/flavor.png" alt="Generic placeholder image" width="140" height="140"> </div>
+          <div class="rounded-circle taste-pics" > <img  src="img/flavor2.png" alt="flavor_img" width="110" height="110" style="margin-top:22px" > </div>
           <h2>Flavor</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
 
@@ -294,7 +253,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/balance.png" alt="Generic placeholder image" width="140" height="140"> </div>
+          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/balance2.png" alt="Generic placeholder image" width="120" height="120" style="margin-top:10px;"> </div>
           <h2>Balance</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <font id="balance_value">5</font>
@@ -302,7 +261,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/coffee_beans_roast.png" alt="Generic placeholder image" width="140" height="140"> </div>
+          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/roast2.png" alt="Generic placeholder image" width="140" height="140"> </div>
           <h2>Roasting</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <font id="roasting_value">5</font>
@@ -328,7 +287,7 @@ _gaq.push(['_trackPageview']);
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4">
-          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/smell-512.png" alt="Generic placeholder image" width="140" height="140"> </div>
+          <div class="rounded-circle taste-pics"> <img class="rounded-circle" src="img/smell2.png" alt="Generic placeholder image" width="125" height="125" style="margin-top:5px;"> </div>
           <h2>Aroma</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <font id="aroma_value">5</font>
@@ -381,13 +340,51 @@ _gaq.push(['_trackPageview']);
         <button type="submit" class="btn btn-primary btn-lg btn-block" style="width:70%; margin:auto;">Save</button>
       </div><!-- /.row 4 -->
     </form>
+    <div class="footer" style="height:50px"> <div>
+
   </div> <!-- container marketing -->
 
-  <div class="alert alert-dismissible alert-primary">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-  </div>
 
+  <script>
+  $("#flavor").on('input', function() {
+    $("#flavor_value").html( $(this).val() );
+  });
+  $("#balance").on('input', function() {
+    $("#balance_value").html( $(this).val() );
+  });
+  $("#roasting").on('input', function() {
+    $("#roasting_value").html( $(this).val() );
+  });
+  $("#acidity").on('input', function() {
+    $("#acidity_value").html( $(this).val() );
+  });
+  $("#sweetness").on('input', function() {
+    $("#sweetness_value").html( $(this).val() );
+  });
+  $("#aroma").on('input', function() {
+    $("#aroma_value").html( $(this).val() );
+  });
+
+  $("#aftertaste").on('input', function() {
+    $("#aftertaste_value").html( $(this).val() );
+  });
+  $("#uniformity").on('input', function() {
+    $("#uniformity_value").html( $(this).val() );
+  });
+  $("#cleanup").on('input', function() {
+    $("#cleanup_value").html( $(this).val() );
+  });
+  $("#defect").on('input', function() {
+    $("#defect_value").html( $(this).val() );
+  });
+  $("#body").on('input', function() {
+    $("#body_value").html( $(this).val() );
+  });
+
+
+
+
+  </script>
 
 
 </body>
