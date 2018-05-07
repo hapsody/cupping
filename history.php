@@ -222,6 +222,7 @@ $result = $conn->query($check);
         label: "Evalutaion grade"
       },
     },
+    series:[ {label:'flavor'}, {label:'balance'}, {label:"roasting"}, {label:"acidity"}, {label:"sweetness"}, {label:"aroma"}, {label:"aftertaste"}, {label:"uniformity"}, {label:"cleanup"}, {label:"defect"}, {label:"body"}],
     legend: {
       renderer : $.jqplot.EnhancedLegendRenderer,
       show: true, //표시 유무
@@ -229,7 +230,8 @@ $result = $conn->query($check);
       placement: 'outside', // 위치 (Default 값은 inside)
       textColor : 'black',
       rowSpacing : '0px',//범례 들간의 사이 공간
-      labels:'Beverage',
+
+
     }
   }
 );
