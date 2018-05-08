@@ -1,21 +1,22 @@
 <?php
 session_start();
 
-function write_arr_to_script($target_arr)
+function write_arr_to_script($target_arr, $date_arr)
 {
   $i = 0;
   $arr_length = count($target_arr);
   echo '[';
   foreach($target_arr as $item)
   {
-    echo $item;
+    echo '["'.$date_arr[$i].'",';
+    echo $item.']';
     $i++;
     if($i != $arr_length)
     {
       echo ',';
     }
   }
-  echo '],';
+  echo ']';
   return;
 }
 
@@ -49,8 +50,13 @@ $result = $conn->query($check);
 
   <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css">
   <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+  <script type="text/javascript" src="js/jqplot.canvasTextRenderer.js"> </script>
+  <script type="text/javascript" src="js/jqplot.canvasAxisTickRenderer.min.js"></script>
+  <script type="text/javascript" src="js/jqplot.dateAxisRenderer.min.js"></script>
+
+
 
   <script>
   $(document).ready(function()
@@ -175,7 +181,7 @@ $result = $conn->query($check);
 
             $row_sum = $row['flavor'] + $row['balance'] + $row['roastlevel'] + $row['acidity'] + $row['sweetness'] + $row['aroma'] +
             $row['aftertaste'] + $row['uniformity'] + $row['cleanup'] + $row['defect'] + $row['body'];
-            $row_avg = $row_sum / 11;
+            $row_avg = sprintf('%0.2f', $row_sum / 11);
             echo '<th scope="col">'.$row_avg.'</th>';
             echo '</tr>';
             $i = $i + 1;
@@ -188,38 +194,66 @@ $result = $conn->query($check);
     </div><!-- /.row 1 -->
 
     <div class="row"> <!-- row 2-->
-      <div id="graph" style="width:90%;"></div>
+      <div id="graph" style="width:90%;height:500px"></div>
     </div>
 
     <div class="footer" style="height:50px"> </div>
 
   </div> <!-- container marketing -->
   <script>
-  $.jqplot ('graph',
-  [
-    <?php
-    write_arr_to_script($flavor_arr);
-    write_arr_to_script($balance_arr);
-    write_arr_to_script($roastlevel_arr);
-    write_arr_to_script($acidity_arr);
-    write_arr_to_script($sweetness_arr);
-    write_arr_to_script($aroma_arr);
-    write_arr_to_script($aftertaste_arr);
-    write_arr_to_script($uniformity_arr);
-    write_arr_to_script($cleanup_arr);
-    write_arr_to_script($defect_arr);
-    write_arr_to_script($body_arr);
-    ?>
-  ],
+
+  var flavor = <?php write_arr_to_script($flavor_arr, $created_arr); ?>;
+  var balance = <?php write_arr_to_script($balance_arr, $created_arr); ?>;
+  var roastlevel = <?php write_arr_to_script($roastlevel_arr, $created_arr); ?>;
+  var acidity = <?php write_arr_to_script($acidity_arr, $created_arr); ?>;
+  var sweetness = <?php write_arr_to_script($sweetness_arr, $created_arr); ?>;
+  var aroma = <?php write_arr_to_script($aroma_arr, $created_arr); ?>;
+  var aftertaste = <?php write_arr_to_script($aftertaste_arr, $created_arr); ?>;
+  var uniformity = <?php write_arr_to_script($uniformity_arr, $created_arr); ?>;
+  var cleanup = <?php write_arr_to_script($cleanup_arr, $created_arr); ?>;
+  var defect = <?php write_arr_to_script($defect_arr, $created_arr); ?>;
+  var body = <?php write_arr_to_script($body_arr, $created_arr); ?>;
+
+
+  var date = [['2018-04-25 22:55:53',1],['2017/12/12',2],['2017/12/13',2],['2017/12/14',4]];
+
+  $.jqplot ('graph', [flavor, balance, roastlevel, acidity, sweetness, aroma, aftertaste, uniformity, cleanup, defect, body],
+
+  //  [
+  <?php
+
+  /*
+  write_arr_to_script($flavor_arr);
+  write_arr_to_script($balance_arr);
+  write_arr_to_script($roastlevel_arr);
+  write_arr_to_script($acidity_arr);
+  write_arr_to_script($sweetness_arr);
+  write_arr_to_script($aroma_arr);
+  write_arr_to_script($aftertaste_arr);
+  write_arr_to_script($uniformity_arr);
+  write_arr_to_script($cleanup_arr);
+  write_arr_to_script($defect_arr);
+  write_arr_to_script($body_arr);
+  */
+  ?>
+  //]
+
   {
     title: 'Cupping History Graph',
+    axesDefaults: {
+      tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+      pad: 1.2
+    },
     axes: {
       xaxis:{
-        renderer: $.jqplot.CategoryAxisRenderer,
-        label: "Saved time"
+        renderer: $.jqplot.DateAxisRenderer,
+
+        tickOptions :{
+          angle : 60,
+          formatString:'%F'
+        }
       },
       yaxis: {
-        label: "Evalutaion grade"
       },
     },
     series:[ {label:'flavor'}, {label:'balance'}, {label:"roasting"}, {label:"acidity"}, {label:"sweetness"}, {label:"aroma"}, {label:"aftertaste"}, {label:"uniformity"}, {label:"cleanup"}, {label:"defect"}, {label:"body"}],
@@ -230,8 +264,6 @@ $result = $conn->query($check);
       placement: 'outside', // 위치 (Default 값은 inside)
       textColor : 'black',
       rowSpacing : '0px',//범례 들간의 사이 공간
-
-
     }
   }
 );

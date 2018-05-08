@@ -1,6 +1,6 @@
 <?php
-$username = htmlspecialchars( $_POST['username'] );
-$password = htmlspecialchars( $_POST['password'] );
+$username = htmlspecialchars( $_POST['username2'] );
+$password = htmlspecialchars( $_POST['password2'] );
 $passrepeat = htmlspecialchars( $_POST['passrepeat'] );
 $email = htmlspecialchars( $_POST['email'] );
 
@@ -38,6 +38,8 @@ $signup=mysqli_query($conn, "INSERT INTO user_info (username, password, email, c
 VALUES ( '$username', '$password', '$email', NOW())");
 if($signup){
   echo "sign up success";
+
+  header('refresh:2; url=signin.html');
 } else {
   echo "sign up failed";
 

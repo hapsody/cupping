@@ -1,6 +1,6 @@
 <?php
-$username = htmlspecialchars( $_POST['username'] );
-$password = htmlspecialchars( $_POST['password'] );
+$username = htmlspecialchars( $_POST['username1'] );
+$password = htmlspecialchars( $_POST['password1'] );
 
 
 $conn = mysqli_connect("localhost", "root", "11182917", "cupping");

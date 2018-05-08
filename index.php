@@ -179,6 +179,8 @@ _gaq.push(['_trackPageview']);
 })();
 
 </script>
+
+
 </head>
 
 <body>
@@ -191,7 +193,7 @@ _gaq.push(['_trackPageview']);
 
   <!-- head -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">CUPPING</a>
+    <a class="navbar-brand" href="index.php">CUPPING</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -234,7 +236,7 @@ _gaq.push(['_trackPageview']);
 
   <!-- Three columns of text below the carousel -->
   <div class="container marketing">
-    <form action="submit_process.php" method="post">
+    <form id="evaluation_form" action="submit_process.php" method="post">
 
 
       <div class="row"> <!-- row 1-->
@@ -337,51 +339,62 @@ _gaq.push(['_trackPageview']);
     </form>
     <div class="footer" style="height:50px"> <div>
 
-  </div> <!-- container marketing -->
+    </div> <!-- container marketing -->
 
 
-  <script>
-  $("#flavor").on('input', function() {
-    $("#flavor_value").html( $(this).val() );
-  });
-  $("#balance").on('input', function() {
-    $("#balance_value").html( $(this).val() );
-  });
-  $("#roasting").on('input', function() {
-    $("#roasting_value").html( $(this).val() );
-  });
-  $("#acidity").on('input', function() {
-    $("#acidity_value").html( $(this).val() );
-  });
-  $("#sweetness").on('input', function() {
-    $("#sweetness_value").html( $(this).val() );
-  });
-  $("#aroma").on('input', function() {
-    $("#aroma_value").html( $(this).val() );
-  });
+    <script>
+    $("#flavor").on('input', function() {
+      $("#flavor_value").html( $(this).val() );
+    });
+    $("#balance").on('input', function() {
+      $("#balance_value").html( $(this).val() );
+    });
+    $("#roasting").on('input', function() {
+      $("#roasting_value").html( $(this).val() );
+    });
+    $("#acidity").on('input', function() {
+      $("#acidity_value").html( $(this).val() );
+    });
+    $("#sweetness").on('input', function() {
+      $("#sweetness_value").html( $(this).val() );
+    });
+    $("#aroma").on('input', function() {
+      $("#aroma_value").html( $(this).val() );
+    });
 
-  $("#aftertaste").on('input', function() {
-    $("#aftertaste_value").html( $(this).val() );
-  });
-  $("#uniformity").on('input', function() {
-    $("#uniformity_value").html( $(this).val() );
-  });
-  $("#cleanup").on('input', function() {
-    $("#cleanup_value").html( $(this).val() );
-  });
-  $("#defect").on('input', function() {
-    $("#defect_value").html( $(this).val() );
-  });
-  $("#body").on('input', function() {
-    $("#body_value").html( $(this).val() );
-  });
-
-
+    $("#aftertaste").on('input', function() {
+      $("#aftertaste_value").html( $(this).val() );
+    });
+    $("#uniformity").on('input', function() {
+      $("#uniformity_value").html( $(this).val() );
+    });
+    $("#cleanup").on('input', function() {
+      $("#cleanup_value").html( $(this).val() );
+    });
+    $("#defect").on('input', function() {
+      $("#defect_value").html( $(this).val() );
+    });
+    $("#body").on('input', function() {
+      $("#body_value").html( $(this).val() );
+    });
 
 
-  </script>
+    $("#evaluation_form").submit(function(evt) {
+      // username 유효성 검사
+      <?php
+      if(isset($_SESSION['username']))
+      {
+        return true;
+      } else {
+      ?>
+        evt.preventDefault();
+        alert("please use this after login.");
+<?php } ?>
+      });
+
+      </script>
 
 
-</body>
+    </body>
 
-</html>
+    </html>
