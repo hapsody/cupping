@@ -10,106 +10,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-ae362vOLHy2F1EfJtpMbNW0i9pNM1TP2l5O4VGYYiLJKsaejqVWibbP6BSf0UU5i" crossorigin="anonymous">
-  <style type="text/css">
-  .marketing .col-lg-4 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .taste-pics{
-    height:140px;
-    width:140px;
-    margin:auto;
-    background:#707070;
-  }
-
-  input[type=range] {
-    -webkit-appearance: none;
-    width: 50%;
-    margin: 2.45px 0;
-  }
-  input[type=range]:focus {
-    outline: none;
-  }
-  input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 3.1px;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    background: #A65700;
-    border-radius: 22.9px;
-    border: 0.5px solid #010101;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.31), 0px 0px 1px rgba(13, 13, 13, 0.31);
-    border: 0px solid #000000;
-    height: 8px;
-    width: 16px;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-top: -2.95px;
-  }
-  input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #e37900;
-  }
-  input[type=range]::-moz-range-track {
-    width: 100%;
-    height: 3.1px;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    background: #5e3200;
-    border-radius: 22.9px;
-    border: 0.5px solid #010101;
-  }
-  input[type=range]::-moz-range-thumb {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.31), 0px 0px 1px rgba(13, 13, 13, 0.31);
-    border: 0px solid #000000;
-    height: 8px;
-    width: 16px;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-  }
-  input[type=range]::-ms-track {
-    width: 100%;
-    height: 3.1px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-  }
-  input[type=range]::-ms-fill-lower {
-    background: #000000;
-    border: 0.5px solid #010101;
-    border-radius: 45.8px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-  }
-  input[type=range]::-ms-fill-upper {
-    background: #5e3200;
-    border: 0.5px solid #010101;
-    border-radius: 45.8px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-  }
-  input[type=range]::-ms-thumb {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.31), 0px 0px 1px rgba(13, 13, 13, 0.31);
-    border: 0px solid #000000;
-    height: 8px;
-    width: 16px;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-    height: 3.1px;
-  }
-  input[type=range]:focus::-ms-fill-lower {
-    background: #5e3200;
-  }
-  input[type=range]:focus::-ms-fill-upper {
-    background: #e37900;
-  }
-
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.css">
+  <link rel="stylesheet" href="css/general.css">
 
 
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -119,49 +21,73 @@
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.js"></script>
+  <style>
+  .floatMenu {
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    background-color: #606060;
+    margin:0;
+    padding:0;
+    color: #fff;
+    /*transparency*/
+  }
 
+  #notePrompt input{
+    width:100%;
+    height:45px;
 
+  }
+  </style>
 
   <script>
-  $( function() {
-    // run the currently selected effect
-    function runEffect() {
-      // Run the effect
-      $( "#saving_effect" ).show( 'blind', '', 500, callback );
-    };
+  $(document).ready(function () {
+    $( function() {
+      // data saved part.
+      function runEffect() {
+        // Run the effect
+        $( "#saving_effect" ).show( 'blind', '', 500, callback );
+      };
 
-    //callback function to bring a hidden box back
-    function callback() {
-      setTimeout(function() {
-        $( "#saving_effect:visible" ).removeAttr( "style" ).fadeOut();
-      }, 3000 );
-    };
+      function callback() {
+        setTimeout(function() {
+          $( "#saving_effect:visible" ).removeAttr( "style" ).fadeOut();
+        }, 3000 );
+      };
 
-    // Set effect from select menu value
-    /*
-    $( "#button" ).on( "click", function() {
-    runEffect();
+
+      $( "#saving_effect" ).hide();
+      <?php
+      //if ( isset($_SESSION['username']) )
+      if ( isset($_SESSION['saved']) ){
+        if ( $_SESSION['saved'] == true)
+        {
+
+          echo 'runEffect();';
+
+          $_SESSION['saved'] = false;
+        }
+      }
+      ?>
+
+
+    });
+
+    //initialize swiper when document ready
+    var mySwiper = new Swiper ('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      loop: true
+    })
+
+
+
   });
-  */
-  $( "#saving_effect" ).hide();
-  <?php
-  //if ( isset($_SESSION['username']) )
-  if ( isset($_SESSION['saved']) ){
-    if ( $_SESSION['saved'] == true)
-    {
-
-      echo 'runEffect();';
-
-      $_SESSION['saved'] = false;
-    }
-  }
-  ?>
-
-
-
-
-
-});
 </script>
 
 <script>
@@ -181,15 +107,17 @@ _gaq.push(['_trackPageview']);
 </script>
 
 
+
 </head>
 
 <body>
 
-
+  <!-- data saved message -->
   <div id="saving_effect" class="alert alert-dismissible alert-primary">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Data Saved</strong>
   </div>
+
 
   <!-- head -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -206,7 +134,9 @@ _gaq.push(['_trackPageview']);
         <li class="nav-item">
           <a class="nav-link" href="history.php">History</a>
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link" href="contact.php">Contact</a>
+        </li>
       </ul>
       <?php
 
@@ -224,6 +154,39 @@ _gaq.push(['_trackPageview']);
     </div>
   </nav>
 
+  <!-- swiper-->
+  <div class="swiper-container"  style="padding-bottom: 10px" >
+    <div class="parallax-bg" style="background-image:url(img/cup_of_coffee.jpg)" data-swiper-parallax="-23%"></div>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="title" data-swiper-parallax="-300">Slide 1</div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="title" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">Slide 2</div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="title" data-swiper-parallax="-300">Slide 3</div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination-white"></div>
+
+  </div>
+
+  <!-- main contents -->
   <div class="jumbotron">
     <h1 class="display-3"></h1>
     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -337,64 +300,133 @@ _gaq.push(['_trackPageview']);
         <button type="submit" class="btn btn-primary btn-lg btn-block" style="width:70%; margin:auto;">Save</button>
       </div><!-- /.row 4 -->
     </form>
-    <div class="footer" style="height:50px"> <div>
+    <div class="footer" style="height:50px"> </div>
+  </div> <!-- container marketing -->
 
-    </div> <!-- container marketing -->
+  <div class="floatMenu" id="notePrompt">
+    <input type="text" placeholder="note"/>
+  </div>
 
-
-    <script>
-    $("#flavor").on('input', function() {
-      $("#flavor_value").html( $(this).val() );
-    });
-    $("#balance").on('input', function() {
-      $("#balance_value").html( $(this).val() );
-    });
-    $("#roasting").on('input', function() {
-      $("#roasting_value").html( $(this).val() );
-    });
-    $("#acidity").on('input', function() {
-      $("#acidity_value").html( $(this).val() );
-    });
-    $("#sweetness").on('input', function() {
-      $("#sweetness_value").html( $(this).val() );
-    });
-    $("#aroma").on('input', function() {
-      $("#aroma_value").html( $(this).val() );
-    });
-
-    $("#aftertaste").on('input', function() {
-      $("#aftertaste_value").html( $(this).val() );
-    });
-    $("#uniformity").on('input', function() {
-      $("#uniformity_value").html( $(this).val() );
-    });
-    $("#cleanup").on('input', function() {
-      $("#cleanup_value").html( $(this).val() );
-    });
-    $("#defect").on('input', function() {
-      $("#defect_value").html( $(this).val() );
-    });
-    $("#body").on('input', function() {
-      $("#body_value").html( $(this).val() );
-    });
+  <div class="floatMenu" id="topBenchMark">
+    <p>topBenchMark</p>
+  </div>
+  <div class="floatMenu" id="bottomBenchMark">
+    <p>bottomBenchMark</p>
+  </div>
 
 
-    $("#evaluation_form").submit(function(evt) {
-      // username 유효성 검사
-      <?php
-      if(isset($_SESSION['username']))
-      {
-        return true;
+  <script>
+  $("#flavor").on('input', function() {
+    $("#flavor_value").html( $(this).val() );
+  });
+  $("#balance").on('input', function() {
+    $("#balance_value").html( $(this).val() );
+  });
+  $("#roasting").on('input', function() {
+    $("#roasting_value").html( $(this).val() );
+  });
+  $("#acidity").on('input', function() {
+    $("#acidity_value").html( $(this).val() );
+  });
+  $("#sweetness").on('input', function() {
+    $("#sweetness_value").html( $(this).val() );
+  });
+  $("#aroma").on('input', function() {
+    $("#aroma_value").html( $(this).val() );
+  });
+
+  $("#aftertaste").on('input', function() {
+    $("#aftertaste_value").html( $(this).val() );
+  });
+  $("#uniformity").on('input', function() {
+    $("#uniformity_value").html( $(this).val() );
+  });
+  $("#cleanup").on('input', function() {
+    $("#cleanup_value").html( $(this).val() );
+  });
+  $("#defect").on('input', function() {
+    $("#defect_value").html( $(this).val() );
+  });
+  $("#body").on('input', function() {
+    $("#body_value").html( $(this).val() );
+  });
+
+  var flavorNote = '';
+  console.log('flavorNote init');
+  $('#notePrompt input').on('input', function(){
+    flavorNote = $('#notePrompt input').val();
+    console.log('event: input('+ flavorNote + ')');
+  });
+
+
+  $(document).ready(function() {
+
+
+
+    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+    //var floatPosition = parseInt($("#notePrompt").css('top'));
+    var floatingElementHeight = parseInt($(".floatMenu").css('height'));
+    var windowHeight = window.innerHeight;
+    // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+
+
+    $(window).scroll(function() {
+      // 현재 스크롤 위치를 가져온다.
+      var scrollTop = $(window).scrollTop();
+      //var newPosition = scrollTop + floatPosition + "px";
+      var notePromptPos = scrollTop + windowHeight - floatingElementHeight;
+      var topBenchMarkPos = parseInt(notePromptPos - windowHeight * 4 / 5);
+      var bottomBenchMarkPos = parseInt(notePromptPos - windowHeight / 5);
+
+      //console.log("notePromptPos: " + notePromptPos + " topBenchMarkPos: " + topBenchMarkPos + " bottomBenchMarkPos: " + bottomBenchMarkPos);
+      //console.log(parseInt($('#flavor_value').offset().top));
+      // 애니메이션 없이 바로 따라감
+      $("#notePrompt").css('top', notePromptPos + 'px');
+      //$("#topBenchMark").css('top', topBenchMarkPos  + 'px');
+      //$("#bottomBenchMark").css('top', bottomBenchMarkPos + 'px');
+
+      // 화면 중앙 이하로 내려가면 해당 엘리먼트에 대한 note 정보를 띄우고자 함.
+
+      if( topBenchMarkPos < parseInt($('#flavor_value').offset().top) && bottomBenchMarkPos > parseInt($('#flavor_value').offset().top)){
+        $('#notePrompt input').val('\#flavor: '+ flavorNote);
+
+        console.log(flavorNote);
+        //$('#notePrompt').text("flavor");
+
+      } else if( topBenchMarkPos < parseInt($('#balance_value').offset().top) && bottomBenchMarkPos > parseInt($('#balance_value').offset().top)) {
+        //$('#notePrompt').text("Balance");
       } else {
+        $('#notePrompt input').val('');
+      }
+/*
+      animtation
+      $("#floatMenu").stop().animate({
+        "top" : newPosition
+      }, 500);
+*/
+
+    }).scroll();
+  });
+
+  $("#evaluation_form").submit(function(evt) {
+    // username 유효성 검사
+    <?php
+    if(isset($_SESSION['username']))
+    {
+      return true;
+    } else {
       ?>
-        evt.preventDefault();
-        alert("please use this after login.");
-<?php } ?>
-      });
-
-      </script>
+      evt.preventDefault();
+      alert("please use this after login.");
+      <?php } ?>
+    });
 
 
-    </body>
+    </script>
+  </body>
 
-    </html>
+
+
+
+
+  </html>
