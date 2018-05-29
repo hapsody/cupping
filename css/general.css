@@ -1,7 +1,12 @@
 
+.card-title {
+  margin-bottom:0;
+}
 
-
-
+.card-header {
+  padding-top: 0.4rem;
+  padding-bottom:0.4rem;
+}
 
 .marketing .col-lg-4 {
   margin-bottom: 1.5rem;
@@ -12,7 +17,8 @@
   height:140px;
   width:140px;
   margin:auto;
-  background:#707070;
+  background:#EB6864;
+
 }
 
 input[type=range] {
