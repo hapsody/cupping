@@ -24,17 +24,40 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/js/swiper.js"></script>
   <style>
-  .floatMenu {
-    position: absolute;
+  .bottomFloatBar {
+    position: fixed;
     width: 100%;
+    bottom: 0;
 
-    /*height: 45px;
-    background-color: #606060;
-    margin:0;
+  }
+
+  .topFloatBar{
+    position:fixed;
+    width:100%;
+    top: 0;
+    z-index:5;
+  }
+
+  .navbar {
+    z-index:10;
+  }
+
+  .sampleNumberIndex{
+    position:absolute;
+    width:100%;
+    height:50px;
+    background:#e3e3e3;
+    text-align:center;
+
+
+    z-index:2;
+  }
+  .sampleNumberIndex h2 {
+    text-aligne:center;
     padding:0;
-    color: #fff;
-    */
-    /*transparency*/
+    margine:0;
+    position:relative;
+    top:10%
   }
 
   </style>
@@ -67,17 +90,6 @@
         }
         ?>
       });
-
-      //initialize swiper when document ready
-      var mySwiper = new Swiper ('.swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        loop: true
-      })
     });
   })();
 
@@ -93,6 +105,9 @@
     <strong>Data Saved</strong>
   </div>
 
+  <div class="topFloatBar" style="text-align:center;background-color: #e3e3e3;height:50px">
+    <h2 style="margin:5px;padding:0"> #1 </h2>
+  </div>
 
   <!-- head -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -129,181 +144,141 @@
     </div>
   </nav>
 
-  <!-- swiper-->
+
+  <!-- Three columns of text below the carousel -->
+  <?php
+
+
+  $i = 1;
+  while($i <= $_POST['sampleNum'])
+  {
+    ?>
+
+    <div class="sampleNumberIndex"> <h2>#<?php echo $i; ?></h2> </div>
+    <div class="container marketing">
+      <form id="evaluation_form_<?php echo $i; ?>" action="submit_process.php" method="post">
+
+
+        <div class="row"> <!-- row 1-->
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics" > <img src="img/flavor5.png" alt="flavor_img" width="140" height="140"  > </div>
+            <h2>Flavor</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+
+            <font id="flavor_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="flavor_<?php echo $i;?>" id="flavor_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/balance2.png" alt="Generic placeholder image" width="120" height="120" style="margin-top:10px;"> </div>
+            <h2>Balance</h2>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+            <font id="balance_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="balance_<?php echo $i;?>" id="balance_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/roast2.png" alt="Generic placeholder image" width="140" height="140"> </div>
+            <h2>Roasting</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <font id="roasting_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="roastlevel_<?php echo $i;?>" id="roasting_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row 1 -->
+
+        <div class="row"> <!-- /.row 2 -->
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics" > <img src="img/acidity.png" alt="Generic placeholder image" width="140" height="140"> </div>
+            <h2>Acidity</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+            <font id="acidity_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="acidity_<?php echo $i;?>" id="acidity_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/donut-no-sprinkles-512.png" alt="Generic placeholder image" width="140" height="140"> </div>
+            <h2>Sweetness</h2>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+            <font id="sweetness_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="sweetness_<?php echo $i;?>" id="sweetness_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/smell2.png" alt="Generic placeholder image" width="125" height="125" style="margin-top:7px; margin-left:-5px;"> </div>
+            <h2>Aroma</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <font id="aroma_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="aroma_<?php echo $i;?>" id="aroma_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row 2 -->
+        <div class="row"> <!-- /.row 3 -->
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics" > <img src="img/aftertaste.png" alt="flavor_img" width="110" height="110" style="margin-top:22px" > </div>
+            <h2>Aftertaste</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+            <font id="aftertaste_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="aftertaste_<?php echo $i;?>" id="aftertaste_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/uniformity2.png" alt="Generic placeholder image" width="180" height="120" style="margin-top:10px;margin-left:-19px" >  </div>
+            <h2>Uniformity</h2>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+            <font id="uniformity_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="uniformity_<?php echo $i;?>" id="uniformity_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/cleanup.png" alt="Generic placeholder image" width="140" height="140" style="margin-left:-15px" > </div>
+            <h2>Clean up</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <font id="cleanup_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="cleanup_<?php echo $i;?>" id="cleanup_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row 3 -->
+        <div class="row"> <!-- /.row 4 -->
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics" > <img src="img/defect.png" alt="Generic placeholder image" width="150" height="100"  style="margin-top:15px" > </div>
+            <h2>Defect</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+            <font id="defect_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="defect_<?php echo $i;?>" id="defect_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+
+          <div class="col-lg-4">
+            <div class="rounded-circle taste-pics"> <img src="img/body2.png" alt="Generic placeholder image" width="90" height="90" style="margin-top:20px;margin-left:0px" > </div>
+            <h2>Body</h2>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+            <font id="body_value_<?php echo $i;?>">5</font>
+            <p><input type="range" class="slider" name="body_<?php echo $i;?>" id="body_<?php echo $i;?>" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row 4 -->
+        <div class="row"> <!-- /.row 5 -->
+          <button type="submit" class="btn btn-primary btn-lg btn-block" style="width:70%; margin:auto;">Save</button>
+        </div><!-- /.row 4 -->
+      </form>
+      <div class="footer" style="height:50px"> </div>
+    </div> <!-- container marketing -->
+
+    <?php
+    $i = $i + 1;
+  }
+
+  ?>
   <!--
-  <div class="swiper-container"  style="padding-bottom: 10px" >
-  <div class="parallax-bg" style="background-image:url(img/cup_of_coffee.jpg)" data-swiper-parallax="-23%"></div>
-  <div class="swiper-wrapper">
-  <div class="swiper-slide">
-  <div class="title" data-swiper-parallax="-300">Slide 1</div>
-  <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-  <div class="text" data-swiper-parallax="-100">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
-
-</div>
-</div>
-<div class="swiper-slide">
-<div class="title" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">Slide 2</div>
-<div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-<div class="text" data-swiper-parallax="-100">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="title" data-swiper-parallax="-300">Slide 3</div>
-<div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-<div class="text" data-swiper-parallax="-100">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros quis feugiat.</p>
-</div>
-</div>
+  <div class="bottomFloatBar" id="noteBar">
+  <input type="text" placeholder="note"/>
 </div>
 
-<div class="swiper-pagination swiper-pagination-white"></div>
-
-</div>
--->
-<!-- main contents -->
-<!--
-<div class="jumbotron">
-
-<h1 class="display-3"></h1>
-<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-<hr class="my-4">
-<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-<p class="lead">
-<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-</p>
-</div>
--->
-
-<!-- Three columns of text below the carousel -->
-<?php
-$i = 1;
-while($i <= $_POST['sampleNum'])
-{
-  echo '<div class="container marketing">
-  <form id="evaluation_form" action="submit_process.php" method="post">
-
-
-  <div class="row"> <!-- row 1-->
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics" > <img src="img/flavor5.png" alt="flavor_img" width="140" height="140"  > </div>
-  <h2>Flavor</h2>
-  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-
-  <font id="flavor_value">5</font>
-  <p><input type="range" class="slider" name="flavor" id="flavor" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/balance2.png" alt="Generic placeholder image" width="120" height="120" style="margin-top:10px;"> </div>
-  <h2>Balance</h2>
-  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-  <font id="balance_value">5</font>
-  <p><input type="range" class="slider" name="balance" id="balance" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/roast2.png" alt="Generic placeholder image" width="140" height="140"> </div>
-  <h2>Roasting</h2>
-  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-  <font id="roasting_value">5</font>
-  <p><input type="range" class="slider" name="roastlevel" id="roasting" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-  </div><!-- /.row 1 -->
-
-  <div class="row"> <!-- /.row 2 -->
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics" > <img src="img/acidity.png" alt="Generic placeholder image" width="140" height="140"> </div>
-  <h2>Acidity</h2>
-  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-  <font id="acidity_value">5</font>
-  <p><input type="range" class="slider" name="acidity" id="acidity" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/donut-no-sprinkles-512.png" alt="Generic placeholder image" width="140" height="140"> </div>
-  <h2>Sweetness</h2>
-  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-  <font id="sweetness_value">5</font>
-  <p><input type="range" class="slider" name="sweetness" id="sweetness" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/smell2.png" alt="Generic placeholder image" width="125" height="125" style="margin-top:7px; margin-left:-5px;"> </div>
-  <h2>Aroma</h2>
-  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-  <font id="aroma_value">5</font>
-  <p><input type="range" class="slider" name="aroma" id="aroma" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-  </div><!-- /.row 2 -->
-  <div class="row"> <!-- /.row 3 -->
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics" > <img src="img/aftertaste.png" alt="flavor_img" width="110" height="110" style="margin-top:22px" > </div>
-  <h2>Aftertaste</h2>
-  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-  <font id="aftertaste_value">5</font>
-  <p><input type="range" class="slider" name="aftertaste" id="aftertaste" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/uniformity2.png" alt="Generic placeholder image" width="180" height="120" style="margin-top:10px;margin-left:-19px" >  </div>
-  <h2>Uniformity</h2>
-  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-  <font id="uniformity_value">5</font>
-  <p><input type="range" class="slider" name="uniformity" id="uniformity" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/cleanup.png" alt="Generic placeholder image" width="140" height="140" style="margin-left:-15px" > </div>
-  <h2>Clean up</h2>
-  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-  <font id="cleanup_value">5</font>
-  <p><input type="range" class="slider" name="cleanup" id="cleanup" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-  </div><!-- /.row 3 -->
-  <div class="row"> <!-- /.row 4 -->
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics" > <img src="img/defect.png" alt="Generic placeholder image" width="150" height="100"  style="margin-top:15px" > </div>
-  <h2>Defect</h2>
-  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-  <font id="defect_value">5</font>
-  <p><input type="range" class="slider" name="defect" id="defect" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-  <div class="rounded-circle taste-pics"> <img src="img/body2.png" alt="Generic placeholder image" width="90" height="90" style="margin-top:20px;margin-left:0px" > </div>
-  <h2>Body</h2>
-  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-  <font id="body_value">5</font>
-  <p><input type="range" class="slider" name="body" id="body" value="5" min="0" max="10" step="1" data-highlight="true"/></p>
-  </div><!-- /.col-lg-4 -->
-  </div><!-- /.row 4 -->
-  <div class="row"> <!-- /.row 5 -->
-  <button type="submit" class="btn btn-primary btn-lg btn-block" style="width:70%; margin:auto;">Save</button>
-  </div><!-- /.row 4 -->
-  </form>
-  <div class="footer" style="height:50px"> </div>
-  </div> <!-- container marketing -->
-  ';
-  $i = $i + 1;
-}
-
-?>
-<!--
-<div class="floatMenu" id="notePrompt">
-<input type="text" placeholder="note"/>
-</div>
-
-<div class="floatMenu" id="topBenchMark">
+<div class="bottomFloatBar" id="topBenchMark">
 <p>topBenchMark</p>
 </div>
-<div class="floatMenu" id="bottomBenchMark">
+<div class="bottomFloatBar" id="bottomBenchMark">
 <p>bottomBenchMark</p>
 </div>
 -->
 
-<div class="form-group floatMenu" id="notePrompt">
+<div class="bottomFloatBar" id="noteBar">
   <div class="input-group">
     <div class="input-group-prepend">
       <span class="input-group-text" id='noteTag'>#noteTag</span>
@@ -315,25 +290,25 @@ while($i <= $_POST['sampleNum'])
 
 <script>
 var flavorNote = '';
-$('#notePrompt input').on('input', function(){
-  flavorNote = $('#notePrompt input').val();
+$('#noteBar input').on('input', function(){
+  flavorNote = $('#noteBar input').val();
   console.log('event: input('+ flavorNote + ')');
 });
 
 $(document).ready(function() {
   // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-  var floatingElementHeight = parseInt($(".floatMenu").css('height'));
+  var bottomFloatBarHeight = parseInt($(".bottomFloatBar").css('height'));
   var windowHeight = window.innerHeight;
 
   $(window).scroll(function() {
     // 현재 스크롤 위치를 가져온다.
     var scrollTop = $(window).scrollTop();
-    var notePromptPos = scrollTop + windowHeight - floatingElementHeight;
-    var topBenchMarkPos = parseInt(notePromptPos - windowHeight * 4 / 5);
-    var bottomBenchMarkPos = parseInt(notePromptPos - windowHeight / 5);
+    var noteBarPos = scrollTop + windowHeight - bottomFloatBarHeight;
+    var topBenchMarkPos = parseInt(noteBarPos - windowHeight * 4 / 5);
+    var bottomBenchMarkPos = parseInt(noteBarPos - windowHeight / 5);
 
     // 애니메이션 없이 바로 따라감
-    $("#notePrompt").css('top', notePromptPos + 'px');
+    //$("#noteBar").css('top', noteBarPos + 'px');
     $("#topBenchMark").css('top', topBenchMarkPos  + 'px');
     $("#bottomBenchMark").css('top', bottomBenchMarkPos + 'px');
 
@@ -341,72 +316,83 @@ $(document).ready(function() {
     // 화면 중앙 이하로 내려가면 해당 엘리먼트에 대한 note 정보를 띄우고자 함.
     if( topBenchMarkPos < parseInt($('#flavor_value').offset().top) && bottomBenchMarkPos > parseInt($('#flavor_value').offset().top)){
       $('#noteTag').text('#Flavor');
-      $('#notePrompt input').val(flavorNote);
-      $('#notePrompt').show();
+      $('#noteBar input').val(flavorNote);
+      $('#noteBar').show();
       console.log(flavorNote);
-      //$('#notePrompt').text("flavor");
+      //$('#noteBar').text("flavor");
     } else if( topBenchMarkPos < parseInt($('#balance_value').offset().top) && bottomBenchMarkPos > parseInt($('#balance_value').offset().top)) {
-      //$('#notePrompt').text("Balance");
+      //$('#noteBar').text("Balance");
     } else {
-      $('#notePrompt input').val('');
-      $('#notePrompt').hide();
+      $('#noteBar input').val('');
+      $('#noteBar').hide();
     }
 
 
   }).scroll();
 });
 
-$("#flavor").on('input', function() {
-  $("#flavor_value").html( $(this).val() );
-});
-$("#balance").on('input', function() {
-  $("#balance_value").html( $(this).val() );
-});
-$("#roasting").on('input', function() {
-  $("#roasting_value").html( $(this).val() );
-});
-$("#acidity").on('input', function() {
-  $("#acidity_value").html( $(this).val() );
-});
-$("#sweetness").on('input', function() {
-  $("#sweetness_value").html( $(this).val() );
-});
-$("#aroma").on('input', function() {
-  $("#aroma_value").html( $(this).val() );
-});
+<?php
+$i = 1;
+while($i <= $_POST['sampleNum']){
 
-$("#aftertaste").on('input', function() {
-  $("#aftertaste_value").html( $(this).val() );
-});
-$("#uniformity").on('input', function() {
-  $("#uniformity_value").html( $(this).val() );
-});
-$("#cleanup").on('input', function() {
-  $("#cleanup_value").html( $(this).val() );
-});
-$("#defect").on('input', function() {
-  $("#defect_value").html( $(this).val() );
-});
-$("#body").on('input', function() {
-  $("#body_value").html( $(this).val() );
-});
+  ?>
+  $("#flavor_<?php echo $i;?>").on('input', function() {
+    $("#flavor_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#balance_<?php echo $i;?>").on('input', function() {
+    $("#balance_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#roasting_<?php echo $i;?>").on('input', function() {
+    $("#roasting_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#acidity_<?php echo $i;?>").on('input', function() {
+    $("#acidity_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#sweetness_<?php echo $i;?>").on('input', function() {
+    $("#sweetness_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#aroma_<?php echo $i;?>").on('input', function() {
+    $("#aroma_value_<?php echo $i;?>").html( $(this).val() );
+  });
 
-$("#evaluation_form").submit(function(evt) {
-  // username 유효성 검사
-  <?php
-  if(isset($_SESSION['username']))
-  {
-    return true;
-  } else {
+  $("#aftertaste_<?php echo $i;?>").on('input', function() {
+    $("#aftertaste_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#uniformity_<?php echo $i;?>").on('input', function() {
+    $("#uniformity_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#cleanup_<?php echo $i;?>").on('input', function() {
+    $("#cleanup_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#defect_<?php echo $i;?>").on('input', function() {
+    $("#defect_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#body_<?php echo $i;?>").on('input', function() {
+    $("#body_value_<?php echo $i;?>").html( $(this).val() );
+  });
+  $("#evaluation_form_<?php echo $i;?>").submit(function(evt) {
+    // username 유효성 검사
+    <?php
+    if(isset($_SESSION['username']))
+    {
+      echo 'return true;';
+    } else {
+      echo '
+      evt.preventDefault();
+      alert("please use this after login.");
+      ';
+    }
     ?>
-    evt.preventDefault();
-    alert("please use this after login.");
-    <?php } ?>
   });
 
 
+  <?php
+  $i = $i+1;
+}
+?>
 
-  </script>
+
+</script>
 </body>
 
 
