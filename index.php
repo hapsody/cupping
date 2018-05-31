@@ -105,7 +105,7 @@
     <strong>Data Saved</strong>
   </div>
 
-  <div class="topFloatBar" style="text-align:center;background-color: #e3e3e3;height:50px">
+  <div class="topFloatBar" id="topSampleNum" style="text-align:center;background-color: #e3e3e3;height:50px">
     <h2 style="margin:5px;padding:0"> #1 </h2>
   </div>
 
@@ -154,7 +154,7 @@
   {
     ?>
 
-    <div class="sampleNumberIndex"> <h2>#<?php echo $i; ?></h2> </div>
+    <div class="sampleNumberIndex" id="sampleNumberIndex_<?php echo $i; ?>"> <h2>#<?php echo $i; ?></h2> </div>
     <div class="container marketing">
       <form id="evaluation_form_<?php echo $i; ?>" action="submit_process.php" method="post">
 
@@ -270,10 +270,10 @@
   <input type="text" placeholder="note"/>
 </div>
 
-<div class="bottomFloatBar" id="topBenchMark">
+<div class="bottomFloatBar" id="topBenchMark" style="">
 <p>topBenchMark</p>
 </div>
-<div class="bottomFloatBar" id="bottomBenchMark">
+<div class="bottomFloatBar" id="bottomBenchMark" style="">
 <p>bottomBenchMark</p>
 </div>
 -->
@@ -289,10 +289,18 @@
 
 
 <script>
-var flavorNote = '';
-$('#noteBar input').on('input', function(){
-  flavorNote = $('#noteBar input').val();
-  console.log('event: input('+ flavorNote + ')');
+var noteBuf = new Array();
+
+for(i=1; i<= <?php echo $_POST['sampleNum']; ?> ; i++){
+  noteBuf[i] = new Array();
+}
+
+var currentSampleNumber;
+var kindOf;
+$('#noteBar input').on('input', {currentSampleParam: currentSampleNumber}, function(event){
+  // var i = event.data.currentSampleParam;
+  noteBuf[currentSampleNumber][kindOf] = $('#noteBar input').val();
+  console.log('event: input('+ noteBuf[currentSampleNumber] + ') notebuf[' + currentSampleNumber + ']');
 });
 
 $(document).ready(function() {
@@ -300,28 +308,59 @@ $(document).ready(function() {
   var bottomFloatBarHeight = parseInt($(".bottomFloatBar").css('height'));
   var windowHeight = window.innerHeight;
 
+  var noteBarPos = windowHeight - bottomFloatBarHeight;
+  var topBenchMarkDisplayPos = parseInt(noteBarPos - windowHeight * 4 / 5);
+  var bottomBenchMarkDisplayPos = parseInt(noteBarPos - windowHeight / 5);
+
+  var sampleNumObj = [];
+  var sampleNumPos = [];
+
+
+  for(var i=1; i<=<?php echo $_POST['sampleNum']; ?>; i++){
+    //sampleNumObj[i] = $("sampleNumberIndex_"+i);
+    //sampleNumPos[i] = parseInt(sampleNumObj[i].offset().top);
+    sampleNumPos[i] = parseInt($("#sampleNumberIndex_"+i).offset().top) - parseInt($("#sampleNumberIndex_"+i).css('height'));
+
+  }
+
+
   $(window).scroll(function() {
     // 현재 스크롤 위치를 가져온다.
     var scrollTop = $(window).scrollTop();
     var noteBarPos = scrollTop + windowHeight - bottomFloatBarHeight;
+    var topFloatBarPos = scrollTop;
     var topBenchMarkPos = parseInt(noteBarPos - windowHeight * 4 / 5);
     var bottomBenchMarkPos = parseInt(noteBarPos - windowHeight / 5);
 
+
     // 애니메이션 없이 바로 따라감
     //$("#noteBar").css('top', noteBarPos + 'px');
-    $("#topBenchMark").css('top', topBenchMarkPos  + 'px');
-    $("#bottomBenchMark").css('top', bottomBenchMarkPos + 'px');
+    // $("#topBenchMark").css('top', topBenchMarkDisplayPos  + 'px');
+    // $("#bottomBenchMark").css('top', bottomBenchMarkDisplayPos + 'px');
 
+    var i =1;
+    while( topFloatBarPos >= sampleNumPos[i++]); // find min sampleNumberIndex greater than topFloatBarPos
+    // console.log("topFloatBarPos: "+ topFloatBarPos +" i: "+ (i-2));
+
+    if( i-2 <= 0 )
+      i = 3;
+    $('#topSampleNum').html('<h2> #'+ (i-2) + '</h2>');
+    currentSampleNumber = i-2;
+     console.log("currentSampleNumber: " + currentSampleNumber);
 
     // 화면 중앙 이하로 내려가면 해당 엘리먼트에 대한 note 정보를 띄우고자 함.
-    if( topBenchMarkPos < parseInt($('#flavor_value').offset().top) && bottomBenchMarkPos > parseInt($('#flavor_value').offset().top)){
-      $('#noteTag').text('#Flavor');
-      $('#noteBar input').val(flavorNote);
+    if( topBenchMarkPos < parseInt($('#flavor_value_'+ currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#flavor_value_1').offset().top)){
+      kindOf = 1; // kind of coffee taste is flavor.
+      $('#noteTag').text('#Flavor #' + currentSampleNumber);
+      $('#noteBar input').val(noteBuf[currentSampleNumber][kindOf]);
       $('#noteBar').show();
-      console.log(flavorNote);
-      //$('#noteBar').text("flavor");
-    } else if( topBenchMarkPos < parseInt($('#balance_value').offset().top) && bottomBenchMarkPos > parseInt($('#balance_value').offset().top)) {
+
+    } else if( topBenchMarkPos < parseInt($('#balance_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#balance_value_1').offset().top)) {
       //$('#noteBar').text("Balance");
+      kindOf = 2;
+      param = $('#noteTag').text('#Balance #' + currentSampleNumber);
+      $('#noteBar input').val(noteBuf[currentSampleNumber][kindOf]);
+      $('#noteBar').show();
     } else {
       $('#noteBar input').val('');
       $('#noteBar').hide();
