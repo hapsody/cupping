@@ -28,14 +28,24 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-
+    z-index : 10;
   }
 
   .topFloatBar{
     position:fixed;
     width:100%;
-    top: 0;
+    top: 0px;
     z-index:5;
+    text-align:center;
+    background-color: #e3e3e3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    /*
+    -webkit-transition: all 2s linear;
+    -moz-transition: all 2s linear;
+    transition: all 2s linear;
+    */
   }
 
   .navbar {
@@ -48,8 +58,6 @@
     height:50px;
     background:#e3e3e3;
     text-align:center;
-
-
     z-index:2;
   }
   .sampleNumberIndex h2 {
@@ -58,6 +66,40 @@
     margine:0;
     position:relative;
     top:10%
+  }
+
+  #sampleNumberList {
+    max-height:0;
+    overflow:hidden;
+
+
+  }
+
+  #sampleNumberList.active{
+    max-height:100%;
+    display:block;
+    overflow:auto;
+  }
+
+  .slidedownEffect{
+    animation-name:slide-down;
+    animation-duration: .5s;
+    animation-delay: 0;
+    animation-iteration-count: ;
+    animation-timing-function: linear;
+    animation-direction: ;
+  }
+
+  @keyframes slide-down{
+    from{
+      height:50px;
+      overflow:hidden;
+    }
+    to{
+      height:150px;
+      display:block;
+      overflow:auto;
+    }
   }
 
   </style>
@@ -105,8 +147,9 @@
     <strong>Data Saved</strong>
   </div>
 
-  <div class="topFloatBar" id="topSampleNum" style="text-align:center;background-color: #e3e3e3;height:50px">
-    <h2 style="margin:5px;padding:0"> #1 </h2>
+  <div class="topFloatBar" id="topSampleNum" >
+    <h2 id="mainNumber" style="margin:5px;padding:0"> #1 </h2>
+    <div id="sampleNumberList"> </div>
   </div>
 
   <!-- head -->
@@ -275,8 +318,12 @@
 </div>
 <div class="bottomFloatBar" id="bottomBenchMark" style="">
 <p>bottomBenchMark</p>
+</div> -->
+<div class="bottomFloatBar" id="halfBenchMark" style="">
+<p>halfBenchMark</p>
 </div>
--->
+
+
 
 <div class="bottomFloatBar" id="noteBar">
   <div class="input-group">
@@ -297,75 +344,197 @@ for(i=1; i<= <?php echo $_POST['sampleNum']; ?> ; i++){
 
 var currentSampleNumber;
 var kindOf;
+
+
 $('#noteBar input').on('input', {currentSampleParam: currentSampleNumber}, function(event){
   // var i = event.data.currentSampleParam;
   noteBuf[currentSampleNumber][kindOf] = $('#noteBar input').val();
   console.log('event: input('+ noteBuf[currentSampleNumber] + ') notebuf[' + currentSampleNumber + ']');
 });
 
+$('#topSampleNum').on('click', function(){
+  $('#topSampleNum').removeClass('slidedownEffect');
+  $('#topSampleNum').offsetWidth = $('#topSampleNum').offsetWidth;
+  $('#topSampleNum').addClass('slidedownEffect');
+  /*
+  if( $('#sampleNumberList' ).hasClass('active') === true ){
+  $('#sampleNumberList').removeClass('active');
+}
+else {
+$('#sampleNumberList').addClass('active');
+}
+*/
+// $('#sampleNumberList').css('display', 'block');
+// $('#sampleNumberList').css('max-height', '100%');
+
+console.log("topFloatBar is clicked");
+});
+
+function notebarDisplay(identifier, samplenumber, risingOrDown){
+
+  var noteTagText;
+
+  switch(identifier){
+    case 1:
+    noteTagText = '#Flavor #';
+    break;
+    case 2:
+    noteTagText = '#Balance #';
+    break;
+    case 3:
+    noteTagText = '#Roasting #';
+    break;
+    case 4:
+    noteTagText = '#Acidity #';
+    break;
+    case 5:
+    noteTagText = '#Sweetness #';
+    break;
+    case 6:
+    noteTagText = '#Aroma #';
+    break;
+    case 7:
+    noteTagText = '#Aftertaste #';
+    break;
+    case 8:
+    noteTagText = '#Uniformity #';
+    break;
+    case 9:
+    noteTagText = '#Clean Up #';
+    break;
+    case 10:
+    noteTagText = '#Defect #';
+    break;
+    case 11:
+    noteTagText = '#Body #';
+    break;
+  }
+  kindOf = identifier; // kind of coffee taste.
+  $('#noteTag').text(noteTagText + samplenumber);
+  $('#noteBar input').val(noteBuf[samplenumber][kindOf]);
+  $('#noteBar').show();
+}
+
 $(document).ready(function() {
   // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
   var bottomFloatBarHeight = parseInt($(".bottomFloatBar").css('height'));
   var windowHeight = window.innerHeight;
+  var halfWindowHeight = windowHeight / 2;
 
   var noteBarPos = windowHeight - bottomFloatBarHeight;
-  var topBenchMarkDisplayPos = parseInt(noteBarPos - windowHeight * 4 / 5);
-  var bottomBenchMarkDisplayPos = parseInt(noteBarPos - windowHeight / 5);
+  //var topBenchMarkDisplayPos = parseInt(noteBarPos - windowHeight * 4 / 5 - 10);
+  //var bottomBenchMarkDisplayPos = parseInt(noteBarPos - windowHeight / 5 + 10);
+  var halfBenchMarkDisplayPos = parseInt(noteBarPos-windowHeight / 2);
 
   var sampleNumObj = [];
   var sampleNumPos = [];
+
 
 
   for(var i=1; i<=<?php echo $_POST['sampleNum']; ?>; i++){
     //sampleNumObj[i] = $("sampleNumberIndex_"+i);
     //sampleNumPos[i] = parseInt(sampleNumObj[i].offset().top);
     sampleNumPos[i] = parseInt($("#sampleNumberIndex_"+i).offset().top) - parseInt($("#sampleNumberIndex_"+i).css('height'));
-
+    $('#sampleNumberList').append('<h5>#'+i  +'</h5>');
   }
 
-
+  var prevIdentifier = 1;
+  var prevScrollTop = 0;
   $(window).scroll(function() {
     // 현재 스크롤 위치를 가져온다.
+
     var scrollTop = $(window).scrollTop();
     var noteBarPos = scrollTop + windowHeight - bottomFloatBarHeight;
     var topFloatBarPos = scrollTop;
-    var topBenchMarkPos = parseInt(noteBarPos - windowHeight * 4 / 5);
-    var bottomBenchMarkPos = parseInt(noteBarPos - windowHeight / 5);
+//    var topBenchMarkPos = parseInt(noteBarPos - windowHeight * 4 / 5);
+//    var bottomBenchMarkPos = parseInt(noteBarPos - windowHeight / 5);
+    var halfBenchMarkPos = parseInt(noteBarPos - halfWindowHeight);
 
+    var risingOrDown =  prevScrollTop - scrollTop; // risingOrDown 이 양수면 올라가는중 음수면 내려가는중
 
     // 애니메이션 없이 바로 따라감
     //$("#noteBar").css('top', noteBarPos + 'px');
     // $("#topBenchMark").css('top', topBenchMarkDisplayPos  + 'px');
     // $("#bottomBenchMark").css('top', bottomBenchMarkDisplayPos + 'px');
+    $("#halfBenchMarkPos").css('top', halfBenchMarkDisplayPos + 'px');
 
     var i =1;
     while( topFloatBarPos >= sampleNumPos[i++]); // find min sampleNumberIndex greater than topFloatBarPos
     // console.log("topFloatBarPos: "+ topFloatBarPos +" i: "+ (i-2));
 
     if( i-2 <= 0 )
-      i = 3;
-    $('#topSampleNum').html('<h2> #'+ (i-2) + '</h2>');
+    i = 3;
+
     currentSampleNumber = i-2;
-     console.log("currentSampleNumber: " + currentSampleNumber);
+    $('#mainNumber').html('#'+ currentSampleNumber);
 
-    // 화면 중앙 이하로 내려가면 해당 엘리먼트에 대한 note 정보를 띄우고자 함.
-    if( topBenchMarkPos < parseInt($('#flavor_value_'+ currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#flavor_value_1').offset().top)){
-      kindOf = 1; // kind of coffee taste is flavor.
-      $('#noteTag').text('#Flavor #' + currentSampleNumber);
-      $('#noteBar input').val(noteBuf[currentSampleNumber][kindOf]);
-      $('#noteBar').show();
-
-    } else if( topBenchMarkPos < parseInt($('#balance_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#balance_value_1').offset().top)) {
-      //$('#noteBar').text("Balance");
-      kindOf = 2;
-      param = $('#noteTag').text('#Balance #' + currentSampleNumber);
-      $('#noteBar input').val(noteBuf[currentSampleNumber][kindOf]);
-      $('#noteBar').show();
-    } else {
+    var identifier = -1;
+    if( halfBenchMarkPos < parseInt($('#flavor_value_'+ currentSampleNumber).offset().top) ){
+      identifier = 1;
+    } else if( halfBenchMarkPos < parseInt($('#balance_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 2;
+    } else if( halfBenchMarkPos < parseInt($('#roasting_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 3;
+    } else if( halfBenchMarkPos < parseInt($('#acidity_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 4;
+    } else if( halfBenchMarkPos < parseInt($('#sweetness_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 5;
+    } else if( halfBenchMarkPos < parseInt($('#aroma_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 6;
+    } else if( halfBenchMarkPos < parseInt($('#aftertaste_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 7;
+    } else if( halfBenchMarkPos < parseInt($('#uniformity_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 8;
+    } else if( halfBenchMarkPos < parseInt($('#cleanup_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 9;
+    } else if( halfBenchMarkPos < parseInt($('#defect_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 10;
+    } else if( halfBenchMarkPos < parseInt($('#body_value_' + currentSampleNumber).offset().top) ) {
+      identifier = 11;
+    }
+    else {
       $('#noteBar input').val('');
       $('#noteBar').hide();
     }
+    /*
+    // 화면 중앙 이하로 내려가면 해당 엘리먼트에 대한 note 정보를 띄우고자 함.
+    if( topBenchMarkPos < parseInt($('#flavor_value_'+ currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#flavor_value_'+ currentSampleNumber).offset().top)){
+      identifier = 1;
+    } else if( topBenchMarkPos < parseInt($('#balance_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#balance_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 2;
+    } else if( topBenchMarkPos < parseInt($('#roasting_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#roasting_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 3;
+    } else if( topBenchMarkPos < parseInt($('#acidity_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#acidity_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 4;
+    } else if( topBenchMarkPos < parseInt($('#sweetness_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#sweetness_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 5;
+    } else if( topBenchMarkPos < parseInt($('#aroma_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#aroma_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 6;
+    } else if( topBenchMarkPos < parseInt($('#aftertaste_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#aftertaste_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 7;
+    } else if( topBenchMarkPos < parseInt($('#uniformity_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#uniformity_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 8;
+    } else if( topBenchMarkPos < parseInt($('#cleanup_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#cleanup_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 9;
+    } else if( topBenchMarkPos < parseInt($('#defect_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#defect_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 10;
+    } else if( topBenchMarkPos < parseInt($('#body_value_' + currentSampleNumber).offset().top) && bottomBenchMarkPos > parseInt($('#body_value_'+ currentSampleNumber).offset().top)) {
+      identifier = 11;
+    }
+    else {
+      $('#noteBar input').val('');
+      $('#noteBar').hide();
+    }
+*/
 
+    if ( identifier == -1 ) {
+      identifier = prevIdentifier;
+    } else {
+      prevIdentifier = identifier;
+    }
+
+
+    notebarDisplay(identifier, currentSampleNumber);
 
   }).scroll();
 });
