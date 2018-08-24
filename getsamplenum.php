@@ -80,8 +80,8 @@
     text-indent: -9999px;
     opacity: .25;
     background: url(http://helixpowered.com/assets/img/arrow-circle-on-right.svg) no-repeat;
-    background-size: 70px;
-    background-position: 0 1px;
+    background-size: 80px;
+
     -webkit-transition: all .2s linear;
     -moz-transition: all .2s linear;
     transition: all .2s linear;
@@ -97,6 +97,8 @@
   #subscribe-button.show {
     display: inline-block;
     background-size: 70px;
+
+
   }
 
   /* vertically position everything for effect */

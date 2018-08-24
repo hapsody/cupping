@@ -9,8 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!--<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-ae362vOLHy2F1EfJtpMbNW0i9pNM1TP2l5O4VGYYiLJKsaejqVWibbP6BSf0UU5i" crossorigin="anonymous">-->
-  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-RYo6CbRL8rh7rpbkCiH9NYNDn+viHdKTOp1Df1HCOxcq1shtPNZV9s1U/Hot17Qy" crossorigin="anonymous">
+  <!--<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-ae362vOLHy2F1EfJtpMbNW0i9pNM1TP2l5O4VGYYiLJKsaejqVWibbP6BSf0UU5i" crossorigin="anonymous"> // darkly theme-->
+  <!--<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-RYo6CbRL8rh7rpbkCiH9NYNDn+viHdKTOp1Df1HCOxcq1shtPNZV9s1U/Hot17Qy" crossorigin="anonymous"> // journal theme-->
+  <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-RYo6CbRL8rh7rpbkCiH9NYNDn+viHdKTOp1Df1HCOxcq1shtPNZV9s1U/Hot17Qy" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.2/css/swiper.css">
   <link rel="stylesheet" href="css/general.css">
 
@@ -18,6 +19,7 @@
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
   <script src="js/custom.js"></script>
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -72,34 +74,12 @@
     max-height:0;
     overflow:hidden;
 
-
   }
 
   #sampleNumberList.active{
     max-height:100%;
     display:block;
     overflow:auto;
-  }
-
-  .slidedownEffect{
-    animation-name:slide-down;
-    animation-duration: .5s;
-    animation-delay: 0;
-    animation-iteration-count: ;
-    animation-timing-function: linear;
-    animation-direction: ;
-  }
-
-  @keyframes slide-down{
-    from{
-      height:50px;
-      overflow:hidden;
-    }
-    to{
-      height:150px;
-      display:block;
-      overflow:auto;
-    }
   }
 
   </style>
@@ -197,7 +177,7 @@
   {
     ?>
 
-    <div class="sampleNumberIndex" id="sampleNumberIndex_<?php echo $i; ?>"> <h2>#<?php echo $i; ?></h2> </div>
+    <div class="sampleNumberIndex" id="sampleNumberIndex_<?php echo $i; ?>"> <a name="samplenumber#<?php echo $i; ?>"> <h2>#<?php echo $i; ?></h2></a> </div>
     <div class="container marketing">
       <form id="evaluation_form_<?php echo $i; ?>" action="submit_process.php" method="post">
 
@@ -353,22 +333,20 @@ $('#noteBar input').on('input', {currentSampleParam: currentSampleNumber}, funct
 });
 
 $('#topSampleNum').on('click', function(){
-  $('#topSampleNum').removeClass('slidedownEffect');
-  $('#topSampleNum').offsetWidth = $('#topSampleNum').offsetWidth;
-  $('#topSampleNum').addClass('slidedownEffect');
-  /*
   if( $('#sampleNumberList' ).hasClass('active') === true ){
-  $('#sampleNumberList').removeClass('active');
-}
-else {
-$('#sampleNumberList').addClass('active');
-}
-*/
+    $('#sampleNumberList').removeClass('active');
+  }
+  else {
+    $('#sampleNumberList').addClass('active');
+  }
+
 // $('#sampleNumberList').css('display', 'block');
 // $('#sampleNumberList').css('max-height', '100%');
 
-console.log("topFloatBar is clicked");
+  console.log("topFloatBar is clicked");
 });
+
+
 
 function notebarDisplay(identifier, samplenumber, risingOrDown){
 
@@ -435,7 +413,8 @@ $(document).ready(function() {
     //sampleNumObj[i] = $("sampleNumberIndex_"+i);
     //sampleNumPos[i] = parseInt(sampleNumObj[i].offset().top);
     sampleNumPos[i] = parseInt($("#sampleNumberIndex_"+i).offset().top) - parseInt($("#sampleNumberIndex_"+i).css('height'));
-    $('#sampleNumberList').append('<h5>#'+i  +'</h5>');
+  /*  $('#sampleNumberList').append('<a href="#samplenumber#'+i+'"><h5>#'+i  +'</h5></a>');*/
+    $('#sampleNumberList').append('<a href="#samplenumber#'+i+'"><h5>#'+i  +'</h5></a>');
   }
 
   var prevIdentifier = 1;
